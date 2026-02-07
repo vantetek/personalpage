@@ -1,87 +1,117 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<head>
+<meta charset="utf-8">
+<title>Simple Docs Site</title>
 
-        <!--==================== UNICONS ====================-->
-        <link rel="stylesheer" href="https://unicons.iconscout.com/release/v3.0.6/css.line.css">
-        
-        <!--==================== SWIPER CSS ====================-->
-        <link rel="stylesheet" href="assets/css/styles.css">
-        
-        <!--==================== CSS ====================-->
-        <link rel="stylesheet" href="">
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
 
-        <title>Responsive Portfolio Website</title>
-    </head>
-    <body>
-        <!--==================== HEADER ====================-->
-        <header class="header" id="header">
-            
-        </header>
+/* TOP MENU */
+.topbar {
+    background: #2b5797;
+    color: white;
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
 
-        <!--==================== MAIN ====================-->
-        <main class="main">
-            <!--==================== HOME ====================-->
-            <section class="home section" id="home">
-                
-            </section>
+/* LAYOUT */
+.main {
+    display: flex;
+    margin-top: 60px;
+    height: 100%;
+}
 
-            <!--==================== ABOUT ====================-->
-            <section class="about section" id="about">
-                
-            </section>
+/* LEFT MENU */
+.sidebar {
+    width: 230px;
+    background: #f0f0f0;
+    padding: 10px;
+    overflow-y: auto;
+    border-right: 1px solid #ccc;
+}
 
-            <!--==================== SKILLS ====================-->
-            <section class="skills section" id="skills">
+.sidebar a {
+    display: block;
+    padding: 8px;
+    color: #333;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
 
-            </section>
+.sidebar a:hover {
+    background: #ddd;
+}
 
-            <!--==================== QUALIFICATION ====================-->
-            <section class="qualification section">
+/* CONTENT AREA */
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
 
-            </section>
+pre {
+    background: #eee;
+    padding: 10px;
+}
+</style>
 
-            <!--==================== SERVICES ====================-->
-            <section class="services section" id="services">
-                
-            </section>
+<!-- Markdown library -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-            <!--==================== PORTFOLIO ====================-->
-            <section class="portfolio section" id="portfolio">
-                
-            </section>
+<script>
+function loadPage(file) {
+    fetch(file)
+        .then(response => response.text())
+        .then(text => {
+            document.getElementById("content").innerHTML = marked.parse(text);
+        })
+        .catch(err => {
+            document.getElementById("content").innerHTML =
+                "<h2>Error loading page</h2>" + err;
+        });
+}
 
-            <!--==================== PROJECT IN MIND ====================-->
-            <section class="project section">
+// load default page on startup
+window.onload = function() {
+    loadPage("home.md");
+}
+</script>
 
-            </section>
+</head>
 
-            <!--==================== TESTIMONIAL ====================-->
-            <section class="testimonial section">
-                
-            </section>
+<body>
 
-            <!--==================== CONTACT ME ====================-->
-            <section class="contact section" id="contact">
+<div class="topbar">
+    <b>My Documentation Site</b>
+</div>
 
-            </section>
-        </main>
+<div class="main">
 
-        <!--==================== FOOTER ====================-->
-        <footer class="footer">
-         
-        </footer>
-        
-        <!--==================== SCROLL TOP ====================-->
-        
+    <div class="sidebar">
+        <h3>Menu</h3>
 
-        <!--==================== SWIPER JS ====================-->
-        <script src=""></script>
+        <a href="#" onclick="loadPage('home.md')">Home</a>
+        <a href="#" onclick="loadPage('getting-started.md')">Getting Started</a>
+        <a href="#" onclick="loadPage('tutorials.md')">Tutorials</a>
+        <a href="#" onclick="loadPage('about.md')">About</a>
+    </div>
 
-        <!--==================== MAIN JS ====================-->
-        <script src="assets/js/main.js"></script>
-    </body>
+    <div class="content" id="content">
+        Loading...
+    </div>
+
+</div>
+
+</body>
 </html>
-
